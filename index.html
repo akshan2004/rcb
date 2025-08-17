@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Royal Challengers Bengaluru</title>
-    <link rel="icon" type="image/png" href="https://images.seeklogo.com/logo-png/53/2/rcb-logo-png_seeklogo-531612.png">
+    <link rel="icon" type="image/png" href="https://1000logos.net/wp-content/uploads/2024/03/Royal-Challengers-Bengaluru-Logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Oswald:wght@700&display=swap" rel="stylesheet">
@@ -189,6 +189,7 @@
             text-align: center;
             color: white;
             overflow: hidden;
+            margin-top: -90px; /* Pulls the hero up into the space created by the body padding */
         }
 
         .hero-image-top, .hero-image-bottom {
@@ -298,8 +299,8 @@
         }
 
         .player-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
             gap: 20px;
             justify-content: center;
         }
@@ -312,6 +313,7 @@
             transition: transform 0.3s, box-shadow 0.3s;
             border: 1px solid var(--light-grey);
             width: 250px; /* Set a fixed width for the card */
+            flex-shrink: 0; /* Prevent card from shrinking */
         }
         
         .player-card:hover {
@@ -966,6 +968,15 @@
         hamburger.addEventListener('click', () => {
             navLinks.classList.toggle('active');
             hamburger.classList.toggle('toggle');
+        });
+        
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    hamburger.classList.remove('toggle');
+                }
+            });
         });
 
         teamBtns.forEach(btn => {
