@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Challengers Bengaluru</title>
+    <link rel="icon" type="image/png" href="https://images.seeklogo.com/logo-png/53/2/rcb-logo-png_seeklogo-531612.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* CSS Reset and Base Styles */
+        :root {
+            --rcb-red: #EC1C24;
+            --rcb-gold: #D1AB3E;
+            --rcb-black: #2B2A29;
+            --off-white: #f4f4f4;
+            --dark-grey: #1a1a1a;
+            --light-grey: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--rcb-black);
+            color: var(--off-white);
+            line-height: 1.6;
+            padding-top: 90px; /* Pushes all content down to account for fixed header */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+        
+        main {
+            padding-top: 0; /* Removed padding from main */
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--rcb-red);
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        /* Header and Navigation */
+        .header {
+            background-color: var(--rcb-red);
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #a10e14;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+           height: 70px; /* Bigger logo */
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--off-white);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--rcb-gold);
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .social-container, .app-download-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .follow-us-text, .download-app-text {
+            font-weight: 600;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .app-store-logos {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.3rem;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--rcb-gold);
+        }
+        
+        .store-logo {
+            height: 35px;
+            transition: transform 0.2s ease;
+        }
+        .store-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-only-links {
+            display: none; /* Hide by default */
+            flex-direction: column;
+            gap: 15px; /* Reduced gap */
+            align-items: center;
+            padding-top: 15px; /* Reduced padding */
+            margin-top: 10px;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: calc(100vh - 90px); /* Fill remaining viewport height below the header */
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .hero-image-top, .hero-image-bottom {
+            position: absolute;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 50%;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+        }
+
+        .hero-image-top {
+            top: 0;
+            background-image: url('https://www.royalchallengers.com/PRRCB01/public/styles/1061x767_landscape/public/2024-03/SPCS6595%20%281%29.JPG?itok=atds1ulP');
+        }
+
+        .hero-image-bottom {
+            bottom: 0;
+            background-image: url('https://www.royalchallengers.com/PRRCB01/public/styles/1061x767_landscape/public/2025-06/_AIL8656.jpg?itok=vcdm3E9V');
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        /* Team Section */
+        #team .section-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 3.5rem;
+            letter-spacing: 2px;
+        }
+
+        .team-selection {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--light-grey);
+            padding-bottom: 20px;
+        }
+
+        .team-btn {
+            background: transparent;
+            color: white;
+            border: 2px solid var(--light-grey);
+            padding: 10px 30px;
+            margin: 0 10px;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 1px;
+        }
+        
+        .team-btn.active {
+            background-color: var(--rcb-gold);
+            border-color: var(--rcb-gold);
+            color: var(--rcb-black);
+        }
+
+        .team-filters {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .filter-btn {
+            background: var(--light-grey);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--rcb-red);
+        }
+
+        .player-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .player-card {
+            background-color: var(--dark-grey);
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--light-grey);
+        }
+        
+        .player-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(236, 28, 36, 0.3);
+        }
+
+        .player-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            object-position: top;
+            background-color: var(--light-grey);
+        }
+
+        .player-info {
+            padding: 20px;
+        }
+
+        .player-info h3 {
+            font-size: 1.5rem;
+            color: var(--rcb-gold);
+        }
+
+        .player-info p {
+            color: #aaa;
+        }
+
+        /* RCB TV Section */
+        #rcb-tv {
+            background-color: var(--dark-grey);
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .video-card {
+            background-color: var(--light-grey);
+            border-radius: 10px;
+            overflow: hidden;
+            text-decoration: none;
+            color: var(--off-white);
+            display: block;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(236, 28, 36, 0.3);
+        }
+        
+        .video-thumbnail-container {
+            position: relative;
+        }
+        .video-thumbnail-container iframe {
+            width: 100%;
+            height: 215px;
+            border: none;
+        }
+        
+        .video-title {
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Schedule Section */
+        #schedule {
+            background-color: var(--rcb-black);
+        }
+        .schedule-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .match-card {
+            background-color: var(--light-grey);
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .match-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(236, 28, 36, 0.3);
+        }
+        .team-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .team-info img {
+            width: 40px;
+            height: 40px;
+        }
+        .match-details {
+            text-align: center;
+        }
+        .match-details p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        .vs {
+            font-size: 1.5rem;
+            color: var(--rcb-red);
+            font-weight: 900;
+        }
+
+        .match-result {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--off-white);
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .trophy-result {
+            color: var(--rcb-gold);
+            font-size: 1.3rem;
+            font-weight: 900;
+        }
+        
+        .match-type {
+            font-weight: 700;
+            color: var(--rcb-gold);
+            text-transform: uppercase;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        /* News Section */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .news-card {
+            background-color: var(--dark-grey);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--light-grey);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(236, 28, 36, 0.3);
+        }
+        .news-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .news-content {
+            padding: 20px;
+        }
+        .news-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .news-content p {
+            color: #aaa;
+            margin-bottom: 15px;
+        }
+        .read-more {
+            color: var(--rcb-gold);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        /* Shop Section */
+        #shop {
+             background-color: var(--dark-grey);
+        }
+        .merchandise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .merch-card {
+            background-color: var(--light-grey);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .merch-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(236, 28, 36, 0.3);
+        }
+        .merch-card img {
+            width: 100%;
+            display: block;
+        }
+        .merch-info {
+            padding: 15px;
+        }
+        .merch-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        .merch-price {
+            font-weight: 700;
+            color: var(--rcb-gold);
+            margin: 5px 0;
+        }
+        .merch-category {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--rcb-red);
+            color: #f5f0f0f3;
+            padding: 40px 0;
+            text-align: center;
+        }
+        .footer-links {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: #f9f6f6;
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            color: var(--rcb-gold);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1150px) {
+            .header-right {
+                display: none;
+            }
+            .hamburger {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background: var(--rcb-red);
+                position: absolute;
+                top: 90px;
+                right: 0;
+                width: 100%;
+                padding: 0;
+                max-height: calc(100vh - 90px); /* Set max height */
+                overflow-y: auto; /* Enable scroll if needed */
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+                padding: 12px 0; /* Reduced padding */
+                border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            }
+            .nav-links li:last-child {
+                border-bottom: none;
+            }
+            .mobile-only-links {
+                display: flex;
+            }
+            .hamburger.toggle .line1 {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+            .hamburger.toggle .line2 {
+                opacity: 0;
+            }
+            .hamburger.toggle .line3 {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            #team .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .match-card {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar container">
+            <a href="#" class="logo-link">
+                <img src="https://1000logos.net/wp-content/uploads/2024/03/Royal-Challengers-Bengaluru-Logo.png" alt="RCB Logo" class="logo">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#rcb-tv">RCB TV</a></li>
+                <li><a href="#schedule">Schedule</a></li>
+                <li><a href="#news">News</a></li>
+                <li><a href="#shop">Shop</a></li>
+                <!-- Mobile Only Links -->
+                <li class="mobile-only-links">
+                    <div class="social-container">
+                        <span class="follow-us-text">Follow us on</span>
+                        <div class="social-icons">
+                            <a href="https://twitter.com/RCBTweets" target="_blank" title="Follow on X"><i class="fa-brands fa-x-twitter"></i></a>
+                            <a href="https://www.instagram.com/royalchallengers.bengaluru/" target="_blank" title="Follow on Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.youtube.com/c/RoyalChallengersBangalore" target="_blank" title="Subscribe on YouTube"><i class="fab fa-youtube"></i></a>
+                            <a href="https://www.facebook.com/RoyalChallengersBangalore" target="_blank" title="Like on Facebook"><i class="fab fa-facebook"></i></a>
+                        </div>
+                    </div>
+                    <div class="app-download-container">
+                         <span class="download-app-text">Download our app</span>
+                         <div class="app-store-logos">
+                            <a href="#" title="Download on the App Store"><img src="https://upload.wikimedia.org/wikipedia/commons/6/67/App_Store_%28iOS%29.svg" alt="Apple App Store" class="store-logo"></a>
+                            <a href="#" title="Get it on Google Play"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play Store" class="store-logo"></a>
+                         </div>
+                    </div>
+                </li>
+            </ul>
+             <!-- Right side of header (Desktop) -->
+            <div class="header-right">
+                <div class="social-container">
+                    <span class="follow-us-text">Follow us on</span>
+                    <div class="social-icons">
+                        <a href="https://twitter.com/RCBTweets" target="_blank" title="Follow on X"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="https://www.instagram.com/royalchallengers.bengaluru/" target="_blank" title="Follow on Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/c/RoyalChallengersBangalore" target="_blank" title="Subscribe on YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.facebook.com/RoyalChallengersBangalore" target="_blank" title="Like on Facebook"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+                <div class="app-download-container">
+                     <span class="download-app-text">Download our app</span>
+                     <div class="app-store-logos">
+                        <a href="#" title="Download on the App Store"><img src="https://upload.wikimedia.org/wikipedia/commons/6/67/App_Store_%28iOS%29.svg" alt="Apple App Store" class="store-logo"></a>
+                        <a href="#" title="Get it on Google Play"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play Store" class="store-logo"></a>
+                     </div>
+                </div>
+            </div>
+            <div class="hamburger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-overlay"></div>
+            <div class="hero-image-top"></div>
+            <div class="hero-image-bottom"></div>
+            <div class="hero-content">
+                <h1>Welcome to the Home of Champions</h1>
+                <p>The official hub for the 12th Man Army. Get the latest scores, news, and updates on Royal Challengers Bengaluru.</p>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section id="team">
+            <div class="container">
+                <h2 class="section-title">Meet The Squad</h2>
+                <div class="team-selection">
+                    <button class="team-btn active" data-team="men">Men's Team</button>
+                    <button class="team-btn" data-team="women">Women's Team</button>
+                </div>
+                <div class="team-filters">
+                    <button class="filter-btn active" data-filter="all">All Players</button>
+                    <button class="filter-btn" data-filter="Batter">Batters</button>
+                    <button class="filter-btn" data-filter="Bowler">Bowlers</button>
+                    <button class="filter-btn" data-filter="All-Rounder">All-Rounders</button>
+                    <button class="filter-btn" data-filter="Wicketkeeper">Wicketkeepers</button>
+                </div>
+                <div class="player-grid" id="player-grid">
+                    <!-- Player cards will be generated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- RCB TV Section -->
+        <section id="rcb-tv">
+            <div class="container">
+                <h2 class="section-title">RCB Insider</h2>
+                <div class="video-grid">
+                    <div class="video-card">
+                        <div class="video-thumbnail-container">
+                            <iframe src="https://www.youtube.com/embed/MRc8u7QF-8A" title="Bold Diaries: Mr Nags meets Virat Kohli" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h3 class="video-title">Bold Diaries: Mr Nags meets Virat Kohli</h3>
+                    </div>
+                    <div class="video-card">
+                        <div class="video-thumbnail-container">
+                            <iframe src="https://www.youtube.com/embed/pRVYKdpfDl8" title="Mr. Nags Gatecrashes RCB’s IPL 2025 Trophy Celebrations" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h3 class="video-title">Mr. Nags Gatecrashes RCB’s IPL 2025 Trophy Celebrations</h3>
+                    </div>
+                    <div class="video-card">
+                        <div class="video-thumbnail-container">
+                            <iframe src="https://www.youtube.com/embed/he1KGC9dkeE" title="Full Squad Unveil at RCB Unbox 2025" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h3 class="video-title">Full Squad Unveil at RCB Unbox 2025 | Rajat’s First Speech as Captain</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Schedule Section -->
+        <section id="schedule">
+            <div class="container">
+                <h2 class="section-title">IPL 2025 Fixtures</h2>
+                <div class="schedule-list" id="schedule-list">
+                    <!-- Match cards will be generated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- News Section -->
+        <section id="news">
+            <div class="container">
+                <h2 class="section-title">Latest News</h2>
+                <div class="news-grid">
+                    <div class="news-card">
+                        <img src="https://www.royalchallengers.com/PRRCB01/public/styles/432_x_290_landscape/public/2025-06/_S3_8879.jpg?itok=Qyh4Lx8Q" alt="News Image 1">
+                        <div class="news-content">
+                            <h3>Virat Kohli On AB de Villiers</h3>
+                            <p>He deserves to be on the podium with us – Virat Kohli on AB de Villiers joining RCB's IPL win celebrations</p>
+                            <a href="#" class="read-more">Read More &rarr;</a>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <img src="https://www.royalchallengers.com/PRRCB01/public/styles/1061x767_landscape/public/2025-06/GettyImages-2218489542.jpg?itok=M1xExf0Z" alt="News Image 2">
+                        <div class="news-content">
+                            <h3>Ee sala Cup Namdu!</h3>
+                            <p>Rajat Patidar elated to lead RCB to their maiden IPL crown</p>
+                            <a href="#" class="read-more">Read More &rarr;</a>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <img src="https://www.hindustantimes.com/ht-img/img/2025/06/03/550x309/Royal-Challengers-Bengaluru-s-Virat-Kohli-celebrat_1748975740467.jpg" alt="News Image 3">
+                        <div class="news-content">
+                            <h3>This moment is right up there with the best moments in my career</h3>
+                            <p>Virat Kohli on winning the IPL with RCB</p>
+                            <a href="#" class="read-more">Read More &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Shop Section -->
+        <section id="shop">
+            <div class="container">
+                <h2 class="section-title">Official Merchandise</h2>
+                <div class="merchandise-grid">
+                    <div class="merch-card">
+                        <img src="https://tg3.s3.ap-south-1.amazonaws.com/revents/puma-mer/150/60861201_1.jpg" alt="RCB Champions Tee">
+                        <div class="merch-info">
+                            <p class="merch-title">RCB Champions Tee</p>
+                            <p class="merch-price">₹ 1499</p>
+                            <p class="merch-category">Men</p>
+                        </div>
+                    </div>
+                    <div class="merch-card">
+                        <img src="https://tg3.s3.ap-south-1.amazonaws.com/revents/puma-mer/132/69496603_1.jpg" alt="RCB Champions Tee 2025">
+                        <div class="merch-info">
+                            <p class="merch-title">RCB Retro Striper T-Shirt</p>
+                            <p class="merch-price">₹ 2499</p>
+                            <p class="merch-category">Men</p>
+                             <p class="merch-category">Women</p>
+                        </div>
+                    </div>
+                    <div class="merch-card">
+                        <img src="https://tg3.s3.ap-south-1.amazonaws.com/revents/puma-mer/123/71373401_1.jpg" alt="RCB Replica Jersey 2025">
+                        <div class="merch-info">
+                            <p class="merch-title">RCB Replica Jersey 2025</p>
+                            <p class="merch-price">₹ 2299</p>
+                            <p class="merch-category">Men</p>
+                        </div>
+                    </div>
+                    <div class="merch-card">
+                        <img src="https://tg3.s3.ap-south-1.amazonaws.com/revents/puma-mer/125/71373402_1.jpg" alt="RCB Replica Jersey Mens - Green 2025">
+                        <div class="merch-info">
+                            <p class="merch-title">RCB Replica Jersey Mens - Green 2025</p>
+                            <p class="merch-price">₹ 2299</p>
+                            <p class="merch-category">Men</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <ul class="footer-links">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+            </ul>
+            <p>&copy; 2025 Royal Challengers Sports Pvt Ltd. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+
+    <script>
+        // --- DATA ---
+        const menPlayers = [
+            { name: 'Virat Kohli', role: 'Batter', image: 'https://documents.iplt20.com/ipl/IPLHeadshot2025/2.png' },
+            { name: 'Rajat Patidar', role: 'Batter', image: 'https://documents.iplt20.com/ipl/IPLHeadshot2025/597.png' },
+            { name: 'Liam Livingstone', role: 'All-Rounder', image: 'https://documents.iplt20.com/ipl/IPLHeadshot2025/183.png' },
+            { name: 'Phil Salt', role: 'Wicketkeeper', image: 'https://documents.iplt20.com/ipl/IPLHeadshot2025/1220.png' },
+            { name: 'Jitesh Sharma', role: 'Wicketkeeper', image: 'https://documents.iplt20.com/ipl/IPLHeadshot2025/1000.png' },
+            { name: 'Josh Hazlewood', role: 'Bowler', image: 'https://documents.iplt20.com/ipl/IPLHeadshot2025/36.png' },
+            { name: 'Bhuvneshwar Kumar', role: 'Bowler', image: 'https://documents.iplt20.com/ipl/IPLHeadshot2025/15.png' },
+            { name: 'Krunal Pandya', role: 'All-Rounder', image: 'https://documents.iplt20.com/ipl/IPLHeadshot2025/17.png' },
+            { name: 'Yash Dayal', role: 'Bowler', image: 'https://documents.iplt20.com/ipl/IPLHeadshot2025/978.png' },
+            { name: 'Tim David', role: 'All-Rounder', image: 'https://documents.iplt20.com/ipl/IPLHeadshot2025/636.png' },
+            { name: 'Devdutt Padikkal', role: 'Batter', image: 'https://documents.iplt20.com/ipl/IPLHeadshot2025/200.png' },
+            { name: 'Lungi Ngidi', role: 'Bowler', image: 'https://documents.iplt20.com/ipl/IPLHeadshot2025/99.png' },
+        ];
+
+        const womenPlayers = [
+            { name: 'Smriti Mandhana', role: 'Batter', image: 'https://www.wplt20.com/static-assets/images/players/series/8323/63992.png?v=50.88'},
+            { name: 'Ellyse Perry', role: 'All-Rounder', image: 'https://www.wplt20.com/static-assets/images/players/series/8323/59956.png?v=50.88'},
+            { name: 'Richa Ghosh', role: 'Wicketkeeper', image: 'https://www.wplt20.com/static-assets/images/players/series/8323/74530.png?v=50.88'},
+            { name: 'Renuka Singh', role: 'Bowler', image: 'https://www.wplt20.com/static-assets/images/players/series/5961/70714.png?v=50.86'},
+            { name: 'Sophie Devine', role: 'All-Rounder', image: 'https://www.wplt20.com/static-assets/images/players/62067.png?v=50.88'},
+            { name: 'Heather Knight', role: 'All-Rounder', image: 'https://www.wplt20.com/static-assets/images/players/59735.png?v=50.88'},
+            { name: 'Shreyanka Patil', role: 'All-Rounder', image: 'https://www.wplt20.com/static-assets/images/players/75598.png?v=50.88'},
+            { name: 'Kanika Ahuja', role: 'All-Rounder', image: 'https://www.wplt20.com/static-assets/images/players/series/8323/84086.png?v=50.88'},
+            { name: 'Asha Sobhana', role: 'Bowler', image: 'https://www.wplt20.com/static-assets/images/players/series/5262/75591.png?v=50.88'},
+            { name: 'Disha Kasat', role: 'Batter', image: 'https://www.wplt20.com/static-assets/images/players/84129.png?v=50.86'},
+            { name: 'Georgia Wareham', role: 'All-Rounder', image: 'https://www.wplt20.com/static-assets/images/players/series/8323/67047.png?v=50.88'},
+            { name: 'Ekta Bisht', role: 'Bowler', image: 'https://www.wplt20.com/static-assets/images/players/57461.png?v=50.86'},
+        ];
+
+        const schedule = [
+            { date: 'March 22, 2025', opponent: 'KKR', venue: 'Kolkata', time: '7:30 PM', opponentLogo: 'https://documents.iplt20.com/ipl/KKR/Logos/Logooutline/KKRoutline.png', result: 'RCB won by 7 wickets' },
+            { date: 'March 28, 2025', opponent: 'CSK', venue: 'Chennai', time: '7:30 PM', opponentLogo: 'https://images.seeklogo.com/logo-png/19/2/ipl-chennai-super-kings-logo-png_seeklogo-196613.png', result: 'RCB won by 50 runs' },
+            { date: 'April 2, 2025', opponent: 'GT', venue: 'Bengaluru', time: '7:30 PM', opponentLogo: 'https://documents.iplt20.com/ipl/GT/Logos/Logooutline/GToutline.png', result: 'GT won by 8 wickets' },
+            { date: 'April 7, 2025', opponent: 'MI', venue: 'Mumbai', time: '7:30 PM', opponentLogo: 'https://documents.iplt20.com/ipl/MI/Logos/Logooutline/MIoutline.png', result: 'RCB won by 12 runs' },
+            { date: 'April 10, 2025', opponent: 'DC', venue: 'Bengaluru', time: '7:30 PM', opponentLogo: 'https://upload.wikimedia.org/wikipedia/en/thumb/2/2f/Delhi_Capitals.svg/640px-Delhi_Capitals.svg.png', result: 'DC won by 6 wickets' },
+            { date: 'April 13, 2025', opponent: 'RR', venue: 'Jaipur', time: '3:30 PM', opponentLogo: 'https://documents.iplt20.com/ipl/RR/Logos/RR_Logo.png', result: 'RCB won by 9 wickets' },
+            { date: 'April 18, 2025', opponent: 'PBKS', venue: 'Bengaluru', time: '7:30 PM', opponentLogo: 'https://documents.iplt20.com/ipl/PBKS/Logos/Logooutline/PBKSoutline.png', result: 'PBKS won by 5 wickets' },
+            { date: 'April 27, 2025', opponent: 'LSG', venue: 'Lucknow', time: '7:30 PM', opponentLogo: 'https://documents.iplt20.com/ipl/LSG/Logos/Logooutline/LSGoutline.png', result: 'RCB won by 6 wickets' },
+            { date: 'June 3, 2025', opponent: 'PBKS', venue: 'Ahmedabad', time: '7:30 PM', opponentLogo: 'https://documents.iplt20.com/ipl/PBKS/Logos/Logooutline/PBKSoutline.png', result: '🏆 RCB WON BY 6 RUNS! 🏆', isFinal: true },
+        ];
+
+        // --- STATE MANAGEMENT ---
+        let currentTeam = 'men';
+        let currentRole = 'all';
+
+        // --- DOM ELEMENTS ---
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const teamBtns = document.querySelectorAll('.team-btn');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const playerGrid = document.getElementById('player-grid');
+        const scheduleList = document.getElementById('schedule-list');
+
+        // --- FUNCTIONS ---
+        const displayPlayers = () => {
+            playerGrid.innerHTML = '';
+            const playersToDisplay = currentTeam === 'men' ? menPlayers : womenPlayers;
+            
+            const filteredPlayers = playersToDisplay.filter(player => {
+                if (currentRole === 'all') return true;
+                if (currentRole === 'Wicketkeeper') return player.role.includes('Wicketkeeper');
+                return player.role === currentRole;
+            });
+
+            filteredPlayers.forEach(player => {
+                const card = document.createElement('div');
+                card.className = 'player-card';
+                card.innerHTML = `
+                    <img src="${player.image}" alt="${player.name}" onerror="this.onerror=null;this.src='https://placehold.co/400x600/cccccc/000000?text=Image+Not+Found';">
+                    <div class="player-info">
+                        <h3>${player.name}</h3>
+                        <p>${player.role}</p>
+                    </div>
+                `;
+                playerGrid.appendChild(card);
+            });
+        };
+
+        const displaySchedule = () => {
+            scheduleList.innerHTML = '';
+            schedule.forEach(match => {
+                const isHomeGame = match.venue === 'Bengaluru';
+                const rcbInfo = `<div class="team-info"><img src="https://images.seeklogo.com/logo-png/53/2/rcb-logo-png_seeklogo-531612.png" alt="RCB Logo"><span>RCB</span></div>`;
+                const opponentInfo = `<div class="team-info"><img src="${match.opponentLogo}" alt="${match.opponent} Logo"><span>${match.opponent}</span></div>`;
+                
+                let resultHtml = ''; // Start with an empty result string
+                if (match.result) {
+                    if (match.isFinal) {
+                        resultHtml = `<div class="match-result trophy-result">${match.result}</div>`;
+                    } else {
+                        resultHtml = `<div class="match-result">${match.result}</div>`;
+                    }
+                }
+                
+                let matchTypeHtml = '';
+                if (match.isFinal) {
+                    matchTypeHtml = `<p class="match-type">Final</p>`;
+                }
+
+                const detailsHtml = `
+                    <div class="match-details">
+                        ${matchTypeHtml}
+                        <p>${match.date}</p>
+                        <p>${match.time} at ${match.venue}</p>
+                        ${resultHtml}
+                    </div>
+                `;
+
+                const card = document.createElement('div');
+                card.className = 'match-card';
+                card.innerHTML = `
+                    ${isHomeGame ? rcbInfo : opponentInfo}
+                    ${detailsHtml}
+                    ${isHomeGame ? opponentInfo : rcbInfo}
+                `;
+                scheduleList.appendChild(card);
+            });
+        };
+
+        // --- EVENT LISTENERS ---
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('toggle');
+        });
+
+        teamBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelector('.team-btn.active').classList.remove('active');
+                btn.classList.add('active');
+                currentTeam = btn.dataset.team;
+                displayPlayers();
+            });
+        });
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelector('.filter-btn.active').classList.remove('active');
+                btn.classList.add('active');
+                currentRole = btn.dataset.filter;
+                displayPlayers();
+            });
+        });
+        
+        // --- INITIALIZE APP ---
+        document.addEventListener('DOMContentLoaded', () => {
+            displayPlayers();
+            displaySchedule();
+        });
+
+    </script>
+</body>
+</html>
